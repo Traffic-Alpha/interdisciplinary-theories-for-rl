@@ -19,6 +19,13 @@
 10. [不确定性、风险与鲁棒决策](#10-不确定性风险与鲁棒决策)
 11. [信息几何、最优传输与分布优化](#11-信息几何最优传输与分布优化)
 
+## 专题与案例
+
+- [最优性与帕累托权衡](docs/theory/optimality-and-pareto.md) · [多目标 RL 与交通信号控制](docs/research/multi-objective-traffic-signal.md)
+- [平均场方法](docs/theory/mean-field-methods.md) · [平均场 RL 与出行路线选择](docs/research/mean-field-route-choice.md)
+
+[查看全部专题与标签](docs/index.md)
+
 ## 1. 博弈论与策略交互
 
 *Game Theory and Strategic Interaction*
@@ -55,6 +62,8 @@
 **与强化学习的联系**　大规模多智能体学习、交通流与车群控制、分布式资源分配。 [均值场变分近似](#后验推断与计算) · [统计物理中的平均场](#宏观近似与计算)
 
 同样是用群体分布描述交通流，平均场博弈可以研究驾驶者各自作最优响应时形成的流量，平均场控制可以研究以全网延误为目标的协调策略。两者的区别体现在优化目标和群体分布进入方程的方式。
+
+[平均场方法对照](docs/theory/mean-field-methods.md) · [出行路线选择案例](docs/research/mean-field-route-choice.md)
 
 ### 大规模主体建模
 
@@ -146,6 +155,11 @@
 - **混合整数规划（Mixed-Integer Programming, MIP）** — 将连续变量和整数变量放在同一模型中，联合描述数量分配、开关或组合选择。 [MOSEK 建模手册 · 混合整数建模与实例](https://docs.mosek.com/modeling-cookbook/mio.html)
 - **次模优化（Submodular Optimization）** — 利用集合函数的边际收益递减性质，分析选址、覆盖等离散优化问题。 [Bach · 次模函数与凸优化教程](https://arxiv.org/abs/1111.6453)
 
+### 最优性判定
+
+- **局部最优与全局最优（Local and Global Optima）** — 局部最优只在邻域内成立，而全局最优需要与整个可行域比较。 [专题 · 最优性与帕累托权衡](docs/theory/optimality-and-pareto.md#单目标如何判定最优)
+- **一阶与二阶最优性条件（First- and Second-Order Optimality Conditions）** — 对二阶可微的无约束问题，可以用梯度和 Hessian 判断候选点能否成为局部极小值。 [Boyd 与 Vandenberghe · 无约束最小化第 9 章](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
+
 ### 对偶、分解与迭代
 
 - **拉格朗日对偶（Lagrangian Duality）** — 为约束引入乘子并构造对偶问题，以界定原问题的最优值并利用可分结构。 [Boyd 与 Vandenberghe · 对偶性第 5 章](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
@@ -175,11 +189,15 @@
 - **障碍函数方法（Barrier Methods）** — 在目标中加入靠近可行域边界时增大的代价，使迭代从内部逼近受约束最优解。 [Boyd 与 Vandenberghe · 内点法第 11 章](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
 - **机会约束优化（Chance-Constrained Optimization）** — 要求不确定条件下的约束以至少指定概率成立。 [Nemirovski 与 Shapiro · 机会约束与凸近似](https://www2.isye.gatech.edu/~nemirovs/ChanceConstr-Nov14.pdf)
 
+[最优性与帕累托权衡](docs/theory/optimality-and-pareto.md#多目标如何选解) · [交通信号控制案例](docs/research/multi-objective-traffic-signal.md)
+
 ### 决策层级与目标权衡
 
 - **双层优化（Bilevel Optimization）** — 将下层优化问题的最优解纳入上层的目标或约束，使上层决策显式依赖下层响应。 [Colson 等 · 双层优化形式与应用](https://www.iro.umontreal.ca/~marcotte/ARTIPS/AOR2007.pdf)
 - **层次优化（Hierarchical Optimization）** — 按决策层级或优先级组织多个优化问题，并明确各层如何传递约束、目标或解。 [Gurobi · 按优先级优化多个目标的实例](https://docs.gurobi.com/projects/optimizer/en/current/features/multiobjective.html)
 - **多目标优化（Multi-objective Optimization）** — 同时处理多个目标，并用帕累托最优等概念描述可行的权衡。 [Boyd 与 Vandenberghe · 向量优化与帕累托解 §4.7](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
+- **帕累托最优与前沿（Pareto Optimality and Frontier）** — 找出无法在保持其他目标表现的同时改进任一目标的可行解，再用其目标向量描述可达到的权衡。 [专题 · 帕累托支配与偏好](docs/theory/optimality-and-pareto.md#多目标如何选解)
+- **标量化与 ε-约束（Scalarization and ε-Constraint）** — 用权重把多个目标合成一个标量，或保留主目标并将其余指标写为预算，两种做法可能选择不同的策略。 [案例 · 四种信号策略的比较](docs/research/multi-objective-traffic-signal.md#用四个候选策略说明选择过程)
 - **分布鲁棒优化（Distributionally Robust Optimization, DRO）** — [在候选概率分布集合上优化最坏情形表现](#10-不确定性风险与鲁棒决策)，可用于分布存在估计误差时的约束设计。 [Kuhn 等 · 分布集合与最坏期望](https://arxiv.org/abs/1908.08729)
 
 ## 7. 规划、控制与动态规划
@@ -196,6 +214,7 @@
 
 - **马尔可夫决策过程（Markov Decision Process, MDP）** — 用状态、动作、转移和奖励描述序贯决策，其中给定当前状态和动作即可确定下一步的条件分布。 [UC Berkeley CS188 · MDP 定义与示例](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/markov-decision-processes.html) · [《动手学强化学习》中文实例 · MDP 与价值函数](https://hrl.boyuai.com/chapter/1/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B/)
 - **部分可观测马尔可夫决策过程（Partially Observable Markov Decision Process, POMDP）** — 当真实状态不可直接观测时，用观测历史更新对隐藏状态的信念并据此决策。 [Kaelbling 等 · 信念状态与 POMDP 规划](https://people.smp.uq.edu.au/YoniNazarathy/Control4406_2014/resources/KaelblingLittmanCassandra1998.pdf)
+- **占用测度（Occupancy Measure）** — 统计策略在各状态–动作对上的访问量，有限折扣 MDP 中可将期望回报和累计成本写成占用测度的线性函数。 [EPFL · 线性规划视角下的强化学习](https://www.epfl.ch/labs/lions/wp-content/uploads/2024/08/Lecture-3_-RL-via-Linear-Programming.pdf)
 - **动态规划（Dynamic Programming, DP）** — 把跨时间的优化分解为按状态或阶段递推的子问题。 [Tedrake · 动态规划与控制实例](https://underactuated.mit.edu/dp.html)
 - **贝尔曼方程（Bellman Equation）** — 通过即时收益与下一步价值的关系刻画策略价值，或通过对行动取最优来刻画最优价值。 [UC Berkeley CS188 · 贝尔曼递推与价值迭代](https://inst.eecs.berkeley.edu/~cs188/textbook/mdp/value-iteration.html)
 - **最优控制（Optimal Control）** — 在满足系统动力学和约束的条件下选择控制输入，以优化给定的性能指标。 [Liberzon · 最优控制公开教材](https://liberzon.csl.illinois.edu/teaching/cvoc/)
