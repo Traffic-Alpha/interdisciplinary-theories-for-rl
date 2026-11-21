@@ -2,9 +2,8 @@
 
 **Interdisciplinary Theories and Methods for Reinforcement Learning and Intelligent Decision-Making**
 
-本项目汇集博弈论、数学优化、控制理论、概率统计、统计物理和信息几何中的理论与方法，探索它们如何用于强化学习（Reinforcement Learning, RL）与序贯决策。主题涵盖多主体交互、策略更新、规划与控制，以及如何在约束和不确定性下作出决策。
+本项目汇集博弈论、数学优化、控制理论、概率统计、统计物理和信息几何中的理论与方法，探索它们如何用于强化学习（Reinforcement Learning, RL）。
 
-每个条目末尾附有教材、讲义、教程或论文，可沿链接查看定义、推导与实例。
 
 ## 主题目录
 
